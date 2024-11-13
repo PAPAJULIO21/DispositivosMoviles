@@ -1,0 +1,6 @@
+package AlmacenBebidas
+
+class BebidaAzucarada {
+
+
+}

@@ -1,3 +1,5 @@
+package PrimerosPasos
+
 fun main() {
     println("Hola Pepe")
     print("Estoy hasta los huevos")
