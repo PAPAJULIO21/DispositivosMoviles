@@ -1,41 +1,64 @@
 package AlmacenBebidas
 
 class Almacen {
-    // Creamos una matriz de 5x5 que representa el almacén
-    val almacen = Array(5) { arrayOfNulls<Bebida?>(5) }
+    private val estanterias = Array(5) { arrayOfNulls<Bebida?>(5) }
 
-    // Ejemplo de cómo agregar una bebida en una posición específica
-    fun agregarBebida(fila: Int, columna: Int, bebida: Bebida): Boolean {
-        if (fila in 0..4 && columna in 0..4 && almacen[fila][columna] == null) {
-            almacen[fila][columna] = bebida
-            return true
+    // Agregar bebida
+    fun agregarBebida(bebida: Bebida): Boolean {
+        if (buscarBebidaPorId(bebida.id) != null) {
+            println("La bebida con ID ${bebida.id} ya existe en el almacén.")
+            return false
         }
-        println("No se puede agregar la bebida en esa posición. Puede estar fuera de rango o ya ocupada.")
-        return false
-    }
 
-    // Ejemplo de cómo quitar una bebida en una posición específica
-    fun quitarBebida(fila: Int, columna: Int): Boolean {
-        if (fila in 0..4 && columna in 0..4 && almacen[fila][columna] != null) {
-            almacen[fila][columna] = null
-            return true
-        }
-        println("No se encontró bebida en esa posición para quitar.")
-        return false
-    }
-
-    // Función para mostrar el contenido del almacén
-    fun mostrarAlmacen() {
-        for (fila in almacen) {
-            for (bebida in fila) {
-                if (bebida != null) {
-                    print("${bebida.id} | ")
-                } else {
-                    print("Vacío | ")
+        for (i in estanterias.indices) {
+            for (j in estanterias[i].indices) {
+                if (estanterias[i][j] == null) {
+                    estanterias[i][j] = bebida
+                    println("Bebida con ID ${bebida.id} agregada en la posición ($i, $j).")
+                    return true
                 }
             }
-            println()  // Nueva línea para cada fila
         }
+        println("El almacén está lleno. No se puede agregar la bebida.")
+        return false
     }
 
+    // Eliminar bebida por ID
+    fun eliminarBebida(id: Int): Boolean {
+        for (i in estanterias.indices) {
+            for (j in estanterias[i].indices) {
+                if (estanterias[i][j]?.id == id) {
+                    estanterias[i][j] = null
+                    println("Bebida con ID $id eliminada de la posición ($i, $j).")
+                    return true
+                }
+            }
+        }
+        println("No se encontró una bebida con ID $id en el almacén.")
+        return false
+    }
+
+    // Buscar bebida por ID
+    private fun buscarBebidaPorId(id: Int): Bebida? {
+        for (fila in estanterias) {
+            for (bebida in fila) {
+                if (bebida?.id == id) return bebida
+            }
+        }
+        return null
+    }
+
+    // Mostrar todas las bebidas en el almacén
+    fun mostrarBebidas() {
+        for (fila in estanterias) {
+            for (bebida in fila) {
+                if (bebida != null) {
+                    //bebida.mostrarInformacion()
+                } else {
+                    println("Vacío")
+                }
+            }
+            println("---------")
+        }
+    }
 }
