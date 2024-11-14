@@ -53,7 +53,7 @@ class Almacen {
         for (fila in estanterias) {
             for (bebida in fila) {
                 if (bebida != null) {
-                    //bebida.mostrarInformacion()
+                    bebida.toString()
                 } else {
                     println("Vacío")
                 }

@@ -34,8 +34,25 @@ fun añadirBebida(){
         1 -> {
             println("Tienes que darme los siguientes datos: ")
             println("----------------------")
+            //id,litros,precio,marca,origen
+            print("El ID del agua mineral: ")
+            val id = sc.nextInt()
+            print("La capacidad de litros que tiene el agua mineral: ")
+            val litros = sc.nextDouble()
+            print("El precio del agua mineral: ")
+            val precio = sc.nextDouble()
+            print("La marca del agua mineral: ")
+            val marca = sc.next()
+            print("El origen del agua mineral: ")
+            val origen = sc.next()
+
+            val bebidaAgua = AguaMineral(id,litros,precio,marca,origen)
+            val almacen = Almacen()
+            almacen.agregarBebida(bebidaAgua)
+            println(almacen.mostrarBebidas())
 
         }
+        else -> println("Error al introducir el numero")
     }
 
 }

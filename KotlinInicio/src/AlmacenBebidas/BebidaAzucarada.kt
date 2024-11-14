@@ -2,7 +2,7 @@ package AlmacenBebidas
 
 class BebidaAzucarada(id: Int,litros: Double,precio: Double,marca: String,val porcentajeAzucar: Int,val promocion: Boolean): Bebida(id, litros, precio, marca) {
 
-    override fun getPrecio(): Double {
+    override fun calcularPrecio(): Double {
         return if (promocion){
             precio * 0.9
         }else{
